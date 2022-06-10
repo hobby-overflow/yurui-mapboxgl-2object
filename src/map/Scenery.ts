@@ -18,13 +18,17 @@ export class Scenery {
 
     const boxGeometry = new THREE.BoxGeometry(20, 20, 20);
     const boxMaterial = new THREE.MeshNormalMaterial();
-    const box = new THREE.Mesh(boxGeometry, boxMaterial);
+    const box1 = new THREE.Mesh(boxGeometry, boxMaterial);
     
     const rwy01lL = new LngLat(141.6927, 42.7622);
-    const pos = GeoMath.GetLocation(origin, rwy01lL);
-    console.log(pos);
-    box.position.set(pos.x, pos.y, pos.z);
-    
-    this.scene.add(box);
+    const pos1 = GeoMath.GetLocation(origin, rwy01lL);
+    box1.position.set(pos1.x, pos1.y, pos1.z);
+    this.scene.add(box1);
+
+    const rwy01R = new LngLat(141.6964, 42.7625);
+    const pos2 = GeoMath.GetLocation(origin, rwy01R);
+    const box2 = new THREE.Mesh(boxGeometry, boxMaterial);
+    box2.position.set(pos2.x, pos2.y, pos2.z);
+    this.scene.add(box2);
   }
 }
