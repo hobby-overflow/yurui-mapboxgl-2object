@@ -1,6 +1,6 @@
 # yurui-mapboxgl-2object
 
-## Ussage
+## Usage
 
 ```sh
 yarn
