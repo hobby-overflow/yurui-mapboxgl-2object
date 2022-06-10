@@ -6,9 +6,9 @@ import InitMap from './map/MapSettings';
 import { Scenery } from './map/Scenery';
 import { MapboxMatrix } from './map/MapboxMatrix';
 
-import 'mapbox-gl/dist/mapbox-gl.css'
+import 'mapbox-gl/dist/mapbox-gl.css';
 
-export class Map extends React.Component<{}, {value: number}> {
+export class Map extends React.Component<{}, { value: number }> {
   constructor(props: any) {
     super(props);
   }
