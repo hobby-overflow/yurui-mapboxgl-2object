@@ -23,7 +23,8 @@ export class Map extends React.Component<{}, { value: number }> {
     this.map = InitMap();
 
     const mapOrigin = this.mapboxMatrix.getModelOrigin();
-    const scene = new Scenery(mapOrigin).getScene();
+    const scenery = new Scenery(mapOrigin);
+    const scene = scenery.getScene();
 
     const customLayer: CustomLayerInterface = {
       id: '3d-model',
