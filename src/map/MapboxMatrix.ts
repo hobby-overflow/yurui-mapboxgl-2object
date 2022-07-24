@@ -25,7 +25,8 @@ export class MapboxMatrix {
 
   private calculateOrigin = () => {
     this.modelOrigin = new mapboxgl.LngLat(141.6769, 42.7831);
-    const modelAltitude = 70 * 0.5;
+    // const modelAltitude = 70 * 0.5;
+    const modelAltitude = 1;
     const modelRotate = [Math.PI / 2, 0, 0];
 
     const modelAsMercatorCoodinate = MercatorCoordinate.fromLngLat(
