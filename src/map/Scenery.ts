@@ -1,17 +1,31 @@
 import * as THREE from 'three';
 import { LngLat } from 'mapbox-gl';
 import { GeoMath } from './GeoMath';
+import { Vector3, Object3D } from 'three';
 
 export class Scenery {
-  private scene: THREE.Scene;
   public getScene = () => { return this.scene };
+
+  private scene: THREE.Scene;
+  private origin: LngLat;
 
   constructor(origin: LngLat) {
     this.scene = new THREE.Scene();
-    this.InitScene(origin);
+    this.origin = origin;
+
+    this.InitScene();
   }
 
-  private InitScene = (origin: LngLat) => {
+  private plot = (obj: THREE.Object3D, lnglat: LngLat) => {
+    console.log(this.scene);
+    const location: Vector3 = GeoMath.GetLocation(this.origin, lnglat);
+    console.log(location);
+
+    obj.position.copy(location);
+    this.scene.add(obj);
+  }
+
+  private InitScene = () => {
     const light = new THREE.DirectionalLight(0xffffff);
     light.position.set(0, 70, 100).normalize();
     this.scene.add(light);
@@ -21,16 +35,12 @@ export class Scenery {
     const box = new THREE.Mesh(boxGeometry, boxMaterial);
 
     const box1 = box.clone();
-    console.log(box1)
-    const rwy01lL = new LngLat(141.6927, 42.7622);
-    const pos1 = GeoMath.GetLocation(origin, rwy01lL);
-    box1.position.set(pos1.x, pos1.y, pos1.z);
-    this.scene.add(box1);
+    const rwy01l = new LngLat(141.6927, 42.7622);
+    this.plot(box1, rwy01l);
     
-    const rwy01R = new LngLat(141.6964, 42.7625);
-    const pos2 = GeoMath.GetLocation(origin, rwy01R);
+    
     const box2 = box.clone();
-    box2.position.set(pos2.x, pos2.y, pos2.z);
-    this.scene.add(box2);
+    const rwy01r = new LngLat(141.6964, 42.7625);
+    this.plot(box2, rwy01r)
   }
 }
