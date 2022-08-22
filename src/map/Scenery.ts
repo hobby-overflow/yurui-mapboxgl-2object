@@ -6,6 +6,8 @@ import { Vector3, Object3D } from 'three';
 export class Scenery {
   public getScene = () => { return this.scene };
 
+  public objects = new Array<Object3D>();
+
   private scene: THREE.Scene;
   private origin: LngLat;
 
@@ -17,11 +19,9 @@ export class Scenery {
   }
 
   private plot = (obj: THREE.Object3D, lnglat: LngLat) => {
-    console.log(this.scene);
     const location: Vector3 = GeoMath.GetLocation(this.origin, lnglat);
-    console.log(location);
-
     obj.position.copy(location);
+    this.objects.push(obj);
     this.scene.add(obj);
   }
 
