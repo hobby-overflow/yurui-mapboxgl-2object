@@ -38,6 +38,8 @@ export class Scenery {
   private scene: THREE.Scene;
   private origin: LngLat;
 
+  private acDataBase: {[key: string]: Aircraft} = {}
+
   constructor(origin: LngLat) {
     this.scene = new THREE.Scene();
     this.origin = origin;
@@ -72,10 +74,12 @@ export class Scenery {
 
       let jal = new Aircraft(141.6927, 42.7622, b737Model);
       jal.setHeading(352.62);
-      // jal.obj.rotation.z = (-352.62) * (Math.PI / 180);
       let ana = new Aircraft(141.6964, 42.7625)
-      this.acPlot(jal);
-      this.acPlot(ana);
+
+      this.acDataBase["JAL"] = jal;
+      this.acDataBase["ANA"] = ana;
+      this.acPlot(this.acDataBase["JAL"]);
+      this.acPlot(this.acDataBase["ANA"]);
     });
 
     const light = new THREE.DirectionalLight(0xffffff);
